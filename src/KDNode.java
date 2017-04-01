@@ -1,14 +1,14 @@
 
 public class KDNode {
 	
-	public KDNode(float key, int axis){
+	public KDNode(double key, int axis){
 		Key = key;
 		Axis = axis;
 		elem = null;
 		Left = null;
 		Right = null;
 	}
-	public KDNode(float key ,int axis,GeoLoc e) {
+	public KDNode(double key ,int axis,GeoLoc e) {
 		
 		Key = key;
 		Axis = axis;
@@ -17,8 +17,12 @@ public class KDNode {
 		Right = null;
 	}
 	
+	public boolean IsLeaf(){
+		return elem != null;
+	}
+	
 	public GeoLoc elem;
-	public float Key;
+	public double Key;
 	public int Axis;
 	public KDNode Left;
 	public KDNode Right;

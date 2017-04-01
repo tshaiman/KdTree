@@ -10,7 +10,7 @@ public class GeoComperator implements Comparator<GeoLoc>
 	}
 	@Override
 	public int compare(GeoLoc g1, GeoLoc g2) {
-		float diff=  g1.X - g2.X;
+		double diff=  g1.X - g2.X;
 		if (axis == KDTree.YSplit)
 			diff = g1.Y - g2.Y;
 		

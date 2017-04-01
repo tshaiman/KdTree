@@ -1,15 +1,15 @@
 
 public class GeoLoc {
-	public float X ;
-	public float Y;
+	public double X ;
+	public double Y;
 	
-	public GeoLoc(float x , float y  ){
+	public GeoLoc(double x , double y  ){
 		X = x;
 		Y = y;
 	}
 	
 	public int Compare(GeoLoc other,int axis){
-		float diff=  X - other.X;
+		double diff=  X - other.X;
 		if (axis == KDTree.YSplit)
 			diff = Y - other.Y;
 		
@@ -21,7 +21,7 @@ public class GeoLoc {
 	
 	}
 	
-	public float Key(int axis) {
+	public double Key(int axis) {
 		return axis == KDTree.XSplit ? X : Y;
 	}
 	
