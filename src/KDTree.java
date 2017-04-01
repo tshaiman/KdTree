@@ -39,15 +39,16 @@ public class KDTree {
 		//Leaf Node = > we must check it 
 		if(tree.elem != null)
 		{
-			if(q.IsCloseToCity(tree.elem))
-				results.add(tree.elem);
+			ValidateAndInsert(tree.elem,q,results);
 			return;
 		}
 		
 		//1. case 1 : the range is entirely inside the query , add all points of the tree
 		if(q.Contains(range))
 		{
-			GetAllNodes(tree, results);
+			ArrayList<GeoLoc> allRangeRes = new ArrayList<GeoLoc>();
+			GetAllNodes(tree, allRangeRes);
+			ValidateAndInsert(allRangeRes,q,results);
 			return;
 		}
 		
@@ -75,6 +76,19 @@ public class KDTree {
 		}
 	}
 	
+	private void ValidateAndInsert(ArrayList<GeoLoc> candidates,Query q,ArrayList<GeoLoc> results)
+	{
+		for(GeoLoc loc :candidates)
+		{
+			ValidateAndInsert(loc,q,results);
+		}
+	}
+	
+	private void ValidateAndInsert(GeoLoc loc,Query q,ArrayList<GeoLoc> results)
+	{
+		if(q.IsCloseToCity(loc))
+				results.add(loc);
+	}
 		
 	private void GetAllNodes(KDNode tree,ArrayList<GeoLoc> results)
 	{

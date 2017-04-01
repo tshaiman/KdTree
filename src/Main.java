@@ -11,24 +11,37 @@ public class Main {
 			arr.add(new GeoLoc(r.nextFloat() * 100,r.nextFloat() * 100));
 		}
 		
-		for(GeoLoc loc : arr){
-			 //System.out.println(loc);
-		 }
-		
 		KDTree tree = new KDTree();
 		tree.Build(arr);
 		
 		GeoLoc query = new GeoLoc(r.nextFloat() * 100, r.nextFloat()*100);
 		//int radius = r.nextInt() % 6;
-		double radius = 7.3;
-		System.out.println("Query : " + query + " . Results : ");
-		System.out.println("==========");
+		double radius = 0.3;
 		ArrayList<GeoLoc> results =  tree.RangeSearch(query,radius);
+		PrintResults("Query : " + query + " . KD-Tree Results : ",results);
+				 
+		 ArrayList<GeoLoc> naiveResults = new ArrayList<GeoLoc>();
+		//Test Against "Naive approach"
+		for(GeoLoc loc : arr) {
+			//calculate distance 
+			double dist = GeoLoc.Distance(loc, query);
+			if(dist <= radius)
+				naiveResults.add(loc);
+			
+		}
+		PrintResults("Query : " + query + " . Naive Results : ",naiveResults);
+		
+		
+	}
+	
+	private static void PrintResults(String title , ArrayList<GeoLoc> results )
+	{
+		System.out.println(title);
+		System.out.println("==========");
 		 for(GeoLoc loc : results){
 			 System.out.println(loc);
 		 }
 	}
-	
 	
 	public static void main2(String[] args) {
 		
